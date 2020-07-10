@@ -1,0 +1,23 @@
+p {
+  margin: 1% !important;
+}
+
+body {
+  background-color: #1B1C1D;
+  color: white;
+}
+
+body .login-container {
+  width: 40vw;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+body .login-container .card {
+  background-color: #1B1C1D;
+}
+/*# sourceMappingURL=styles.css.map */
