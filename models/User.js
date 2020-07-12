@@ -5,19 +5,20 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    displayName: {
-        type: String,
-        required: true
-    },
-    firstName: {
-        type: String,
-        required: true
-    },
-    lastName: {
+    name: {
         type: String,
         required: true
     },
     image: { 
+        type: String,
+    },
+    email: { 
+        type: String,
+    },
+    contact: { 
+        type: Number,
+    },
+    location: { 
         type: String,
     },
     createdAt: {
