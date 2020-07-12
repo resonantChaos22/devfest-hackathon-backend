@@ -1,4 +1,5 @@
-const Doctor = require('../../models/Doctor');
+const Doctor = require("../../models/Doctor");
+const upload = require("../../config/mutler");
 
 // Create and Save a new Doctor
 exports.create = (req, res) => {
@@ -6,16 +7,26 @@ exports.create = (req, res) => {
   // Validate request
   if (!req.body.name) {
     return res.status(400).send({
-      message: 'Doctor content can not be empty',
+      message: "Doctor content can not be empty",
     });
   }
 
+  let filename = "";
+  // UPLOADING
+  upload(req, res, (err) => {
+    if (err) {
+      console.error(err);
+    } else {
+      filename = req.file.filename;
+    }
+  });
   // Create a Doctor
   const doctor = new Doctor({
+    userID: req.user._id,
     name: req.body.name,
     type: req.body.type,
     hospital: req.body.hospital,
-    docs: req.body.docs,
+    docs: filename,
   });
 
   // Save doctor in the database
@@ -28,7 +39,8 @@ exports.create = (req, res) => {
     .catch((err) => {
       console.log(err);
       res.status(500).send({
-        message: err.message || 'Some error occurred while creating the doctor.',
+        message:
+          err.message || "Some error occurred while creating the doctor.",
       });
     });
 };
@@ -41,7 +53,7 @@ exports.findAll = (req, res) => {
     })
     .catch((err) => {
       res.status(500).send({
-        message: err.message || 'Some error occurred while retrieving doctors.',
+        message: err.message || "Some error occurred while retrieving doctors.",
       });
     });
 };
@@ -51,19 +63,19 @@ exports.findOne = (req, res) => {
     .then((doctor) => {
       if (!doctor) {
         return res.status(404).send({
-          message: 'doctor not found with id ' + req.params.doctorId,
+          message: "doctor not found with id " + req.params.doctorId,
         });
       }
       res.send(doctor);
     })
     .catch((err) => {
-      if (err.kind === 'ObjectId') {
+      if (err.kind === "ObjectId") {
         return res.status(404).send({
-          message: 'doctor not found with id ' + req.params.doctorId,
+          message: "doctor not found with id " + req.params.doctorId,
         });
       }
       return res.status(500).send({
-        message: 'Error retrieving doctor with id ' + req.params.doctorId,
+        message: "Error retrieving doctor with id " + req.params.doctorId,
       });
     });
 };
@@ -84,19 +96,19 @@ exports.update = (req, res) => {
     .then((doctor) => {
       if (!doctor) {
         return res.status(404).send({
-          message: 'doctor not found with id ' + req.params.doctorId,
+          message: "doctor not found with id " + req.params.doctorId,
         });
       }
       res.send(doctor);
     })
     .catch((err) => {
-      if (err.kind === 'ObjectId') {
+      if (err.kind === "ObjectId") {
         return res.status(404).send({
-          message: 'doctor not found with id ' + req.params.doctorId,
+          message: "doctor not found with id " + req.params.doctorId,
         });
       }
       return res.status(500).send({
-        message: 'Error updating doctor with id ' + req.params.doctorId,
+        message: "Error updating doctor with id " + req.params.doctorId,
       });
     });
 };
@@ -106,7 +118,7 @@ exports.delete = (req, res) => {
   console.log(req.params.doctorID);
   Doctor.findOneAndRemove({ _id: req.params.doctorId }, function (err) {
     if (err) console.log(err);
-    console.log('Successful deletion');
-    res.send({ delete: 'Success' });
+    console.log("Successful deletion");
+    res.send({ delete: "Success" });
   });
 };

@@ -1,5 +1,5 @@
 {
-  "name": "traversy_yt_server",
+  "name": "devfest-hackathon",
   "version": "1.0.0",
   "description": "Stories app I copied from youtube",
   "main": "server.js",

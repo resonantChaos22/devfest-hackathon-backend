@@ -44,14 +44,13 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
 //  ROUTES
-// app.use('/', require('./routes/index'));
+app.use('/', require('./routes/index'));
 app.use('/auth', require('./routes/auth'));
 require('./routes/doctor')(app);
 require('./routes/med')(app);
 require('./routes/patient')(app);
 require('./routes/prescription')(app);
 require('./routes/test')(app);
-app.use(require('./config/mutler'));
 
 const PORT = process.env.PORT || 5001;
 

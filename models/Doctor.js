@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const doctorSchema = new mongoose.Schema({
   userID: {
@@ -25,11 +25,9 @@ const doctorSchema = new mongoose.Schema({
   hospital: {
     type: String,
   },
-  docs: [
-    {
-      type: String,
-    },
-  ],
+  docs: {
+    type: String,
+  },
   prescriptions: [
     {
       type: mongoose.Schema.Types.ObjectId,
@@ -37,4 +35,4 @@ const doctorSchema = new mongoose.Schema({
   ],
 });
 
-module.exports = mongoose.model('Doctor', doctorSchema);
+module.exports = mongoose.model("Doctor", doctorSchema);
