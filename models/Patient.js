@@ -1,26 +1,32 @@
 const mongoose = require('mongoose');
 
 const patientSchema = new mongoose.Schema({
-    userID: {
-        type: mongoose.Schema.Types.ObjectId,
-        required: true
+  userID: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
+  },
+  name: {
+    type: String,
+    required: true,
+  },
+  type: {
+    type: String,
+  },
+  prescriptions: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
     },
-    name: {
-        type: String,
-        required: true
+  ],
+  doctors: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
     },
-    type: { 
-        type: String,
+  ],
+  docs: [
+    {
+      type: String,
     },
-    prescriptions: [{ 
-        type: mongoose.Schema.Types.ObjectId,
-    }],
-    doctors: [{ 
-        type: mongoose.Schema.Types.ObjectId,
-    }],
-    docs: [{ 
-        type: String,
-    }],
+  ],
 });
 
-module.exports = mongoose.model('Patient', userSchema);
+module.exports = mongoose.model('Patient', patientSchema);
